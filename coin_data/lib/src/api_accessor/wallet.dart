@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:coin_data/src/authentication.dart';
-import 'package:coin_data/src/data/all.dart';
+import 'package:coin_data/src/data/raw/all.dart';
 
 Future<List<Wallet>> listWallets({
   @required Authentication authentication,

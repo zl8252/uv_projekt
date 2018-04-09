@@ -1,7 +1,9 @@
 import 'package:meta/meta.dart';
 
+import 'package:coin_data/src/data/raw/i_transaction.dart';
+
 @immutable
-class Transfer implements Comparable<Transfer> {
+class Transfer extends ITransaction implements Comparable<Transfer> {
   final String airtableId;
 
   final int id;
@@ -40,9 +42,9 @@ class Transfer implements Comparable<Transfer> {
       id: fields["id"],
       timeStamp: fields["timestamp"],
       fromWalletId: fields["from_wallet_id"],
-      fromWalletAmount: fromWalletAmount,
+      fromWalletAmount: fromWalletAmount.toDouble(),
       toWalletId: fields["to_wallet_id"],
-      toWalletAmount: toWalletAmount,
+      toWalletAmount: toWalletAmount.toDouble(),
       completed: fields["completed"],
     );
   }

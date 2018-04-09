@@ -1,7 +1,9 @@
 import 'package:meta/meta.dart';
 
+import 'package:coin_data/src/data/raw/i_transaction.dart';
+
 @immutable
-class Deposit implements Comparable<Deposit> {
+class Deposit extends ITransaction implements Comparable<Deposit> {
   final String airtableId;
 
   final int id;

@@ -5,14 +5,19 @@ import 'package:coin_data/coin_data.dart';
 import 'authentication.dart';
 
 Future main() async {
-  List l = await listDeposits(authentication: authentication);
-  l.sort();
+  CoinData coinData = new CoinData.fromAuthentication(
+    authentication: authentication,
+  );
 
-  Deposit d = l[0];
+  await coinData.refreshAllData();
 
-  d = d.copyWith(amount: 150.0);
+  Deposit d = coinData.deposit(50);
 
-  String s = await updateDeposit(authentication: authentication, deposit: d);
+  Wallet w = coinData.wallet(2);
+
+  WalletData walletData = coinData.walletData(w.id);
+
+  double balance = walletData.confirmedBalance;
 
   int a = 1;
 }

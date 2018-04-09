@@ -1,7 +1,9 @@
 import 'package:meta/meta.dart';
 
+import 'package:coin_data/src/data/raw/i_transaction.dart';
+
 @immutable
-class Withdrawal implements Comparable<Withdrawal> {
+class Withdrawal extends ITransaction implements Comparable<Withdrawal> {
   final String airtableId;
 
   final int id;
