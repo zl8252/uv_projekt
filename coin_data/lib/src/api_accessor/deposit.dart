@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/browser_client.dart';
 import 'dart:convert';
 
 import '../authentication.dart';
 import '../data/raw/deposit.dart';
 
 Future<List<Deposit>> listDeposits({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
 }) async {
   const url = "https://api.airtable.com/v0/appDbu7XVhfQDRmIH/Deposit_Log";
 
-  String body = (await http.get(
+  String body = (await browserClient.get(
     url,
     headers: authentication.header,
   ))
@@ -28,6 +29,7 @@ Future<List<Deposit>> listDeposits({
 }
 
 Future<String> createDeposit({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Deposit deposit,
 }) async {
@@ -43,7 +45,7 @@ Future<String> createDeposit({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,
@@ -52,6 +54,7 @@ Future<String> createDeposit({
 }
 
 Future<String> updateDeposit({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Deposit deposit,
 }) async {
@@ -68,7 +71,7 @@ Future<String> updateDeposit({
     }
   });
 
-  return (await http.put(
+  return (await browserClient.put(
     url,
     headers: authentication.header,
     body: body,

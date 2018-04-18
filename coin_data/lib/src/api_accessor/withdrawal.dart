@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/browser_client.dart';
 import 'dart:convert';
 
 import '../authentication.dart';
 import '../data/raw/withdrawal.dart';
 
 Future<List<Withdrawal>> listWithdrawals({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
 }) async {
   const url = "https://api.airtable.com/v0/appDbu7XVhfQDRmIH/Withdrawal_Log";
 
-  String body = (await http.get(
+  String body = (await browserClient.get(
     url,
     headers: authentication.header,
   ))
@@ -28,6 +29,7 @@ Future<List<Withdrawal>> listWithdrawals({
 }
 
 Future<String> createWithdrawal({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Withdrawal withdrawal,
 }) async {
@@ -43,7 +45,7 @@ Future<String> createWithdrawal({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,
@@ -52,6 +54,7 @@ Future<String> createWithdrawal({
 }
 
 Future<String> updateWithdrawal({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Withdrawal withdrawal,
 }) async {
@@ -68,7 +71,7 @@ Future<String> updateWithdrawal({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,

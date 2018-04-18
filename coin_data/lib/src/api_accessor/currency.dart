@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/browser_client.dart';
 import 'dart:convert';
 
 import '../authentication.dart';
 import '../data/raw/currency.dart';
 
 Future<List<Currency>> listCurrencies({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
 }) async {
   const url = "https://api.airtable.com/v0/appDbu7XVhfQDRmIH/Currency";
 
-  String body = (await http.get(
+  String body = (await browserClient.get(
     url,
     headers: authentication.header,
   ))
@@ -28,6 +29,7 @@ Future<List<Currency>> listCurrencies({
 }
 
 Future<String> createCurrency({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Currency currency,
 }) async {
@@ -40,7 +42,7 @@ Future<String> createCurrency({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,
@@ -49,6 +51,7 @@ Future<String> createCurrency({
 }
 
 Future<String> updateCurrency({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Currency currency,
 }) async {
@@ -62,7 +65,7 @@ Future<String> updateCurrency({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,
