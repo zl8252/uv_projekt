@@ -14,16 +14,18 @@ Future<Null> main() async {
   browserClient = new BrowserClient();
   querySelector('#output').text = 'Your Dart app is running.';
 
+  await initCoinData();
+
+  for (Wallet wallet in coinData.wallets){
+    print(wallet);
+  }
+}
+
+Future<Null> initCoinData() async {
   coinData = new CoinData(
     browserClient: browserClient,
     apiKey: "keyGcsgiFPE0sSfS7",
   );
 
   await coinData.refreshAllData();
-  
-  for (Wallet wallet in coinData.wallets){
-    print(wallet);
-  }
-
-  int a = 1;
 }

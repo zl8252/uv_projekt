@@ -52,6 +52,7 @@ class CoinData {
 
     currencies.addAll(
       await api_accessor.listCurrencies(
+        browserClient: browserClient,
         authentication: authentication,
       ),
     );
