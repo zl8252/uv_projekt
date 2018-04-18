@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-import 'package:coin_data/src/data/raw/i_transaction.dart';
+import 'i_transaction.dart';
 
 @immutable
 class Deposit extends ITransaction implements Comparable<Deposit> {

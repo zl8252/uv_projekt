@@ -3,8 +3,8 @@ import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:coin_data/src/authentication.dart';
-import 'package:coin_data/src/data/raw/all.dart';
+import '../authentication.dart';
+import '../data/raw/currency.dart';
 
 Future<List<Currency>> listCurrencies({
   @required Authentication authentication,
