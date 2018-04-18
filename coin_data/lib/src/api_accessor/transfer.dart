@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/browser_client.dart';
 import 'dart:convert';
 
 import '../authentication.dart';
 import '../data/raw/transfer.dart';
 
 Future<List<Transfer>> listTransfers({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
 }) async {
   const url = "https://api.airtable.com/v0/appDbu7XVhfQDRmIH/Transfer_Log";
 
-  String body = (await http.get(
+  String body = (await browserClient.get(
     url,
     headers: authentication.header,
   ))
@@ -28,6 +29,7 @@ Future<List<Transfer>> listTransfers({
 }
 
 Future<String> createTransfer({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Transfer transfer,
 }) async {
@@ -45,7 +47,7 @@ Future<String> createTransfer({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,
@@ -54,6 +56,7 @@ Future<String> createTransfer({
 }
 
 Future<String> updateTransfer({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Transfer transfer,
 }) async {
@@ -72,7 +75,7 @@ Future<String> updateTransfer({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,

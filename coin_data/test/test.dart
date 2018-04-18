@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:coin_data/coin_data.dart';
+import 'package:http/browser_client.dart';
 
 import 'authentication.dart';
 
 Future main() async {
   CoinData coinData = new CoinData.fromAuthentication(
+    browserClient: new BrowserClient(),
     authentication: authentication,
   );
 

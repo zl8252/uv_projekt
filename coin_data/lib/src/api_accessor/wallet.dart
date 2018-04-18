@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/browser_client.dart';
 import 'dart:convert';
 
 import '../authentication.dart';
 import '../data/raw/wallet.dart';
 
 Future<List<Wallet>> listWallets({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
 }) async {
   const url = "https://api.airtable.com/v0/appDbu7XVhfQDRmIH/Wallet";
 
-  String body = (await http.get(
+  String body = (await browserClient.get(
     url,
     headers: authentication.header,
   ))
@@ -28,6 +29,7 @@ Future<List<Wallet>> listWallets({
 }
 
 Future<String> createWallet({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Wallet wallet,
 }) async {
@@ -41,7 +43,7 @@ Future<String> createWallet({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,
@@ -50,6 +52,7 @@ Future<String> createWallet({
 }
 
 Future<String> updateWallet({
+  @required BrowserClient browserClient,
   @required Authentication authentication,
   @required Wallet wallet,
 }) async {
@@ -64,7 +67,7 @@ Future<String> updateWallet({
     }
   });
 
-  return (await http.post(
+  return (await browserClient.post(
     url,
     headers: authentication.header,
     body: body,

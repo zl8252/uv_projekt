@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
+import 'package:http/browser_client.dart';
 
 import 'api_accessor/all.dart' as api_accessor;
 import 'data/all.dart';
@@ -8,6 +9,8 @@ import 'authentication.dart';
 @immutable
 class CoinData {
   final Authentication authentication;
+
+  final BrowserClient browserClient;
 
   final List<Currency> currencies = <Currency>[];
 
@@ -20,13 +23,16 @@ class CoinData {
   final List<Withdrawal> withdrawals = <Withdrawal>[];
 
   CoinData.fromAuthentication({
+    @required this.browserClient,
     @required this.authentication,
   });
 
   factory CoinData({
+    @required BrowserClient browserClient,
     @required String apiKey,
   }) {
     return new CoinData.fromAuthentication(
+      browserClient: browserClient,
       authentication: new Authentication(
         apiKey: apiKey,
       ),
@@ -46,6 +52,7 @@ class CoinData {
 
     currencies.addAll(
       await api_accessor.listCurrencies(
+        browserClient: browserClient,
         authentication: authentication,
       ),
     );
@@ -58,6 +65,7 @@ class CoinData {
 
     deposits.addAll(
       await api_accessor.listDeposits(
+        browserClient: browserClient,
         authentication: authentication,
       ),
     );
@@ -70,6 +78,7 @@ class CoinData {
 
     transfers.addAll(
       await api_accessor.listTransfers(
+        browserClient: browserClient,
         authentication: authentication,
       ),
     );
@@ -82,6 +91,7 @@ class CoinData {
 
     wallets.addAll(
       await api_accessor.listWallets(
+        browserClient: browserClient,
         authentication: authentication,
       ),
     );
@@ -94,6 +104,7 @@ class CoinData {
 
     withdrawals.addAll(
       await api_accessor.listWithdrawals(
+        browserClient: browserClient,
         authentication: authentication,
       ),
     );
@@ -103,6 +114,7 @@ class CoinData {
 
   Future addCurrency(Currency currency) async {
     await api_accessor.createCurrency(
+      browserClient: browserClient,
       authentication: authentication,
       currency: currency,
     );
@@ -112,6 +124,7 @@ class CoinData {
 
   Future updateCurrency(Currency currency) async {
     await api_accessor.updateCurrency(
+      browserClient: browserClient,
       authentication: authentication,
       currency: currency,
     );
@@ -121,6 +134,7 @@ class CoinData {
 
   Future addDeposit(Deposit deposit) async {
     await api_accessor.createDeposit(
+      browserClient: browserClient,
       authentication: authentication,
       deposit: deposit,
     );
@@ -130,6 +144,7 @@ class CoinData {
 
   Future updateDeposit(Deposit deposit) async {
     await api_accessor.updateDeposit(
+      browserClient: browserClient,
       authentication: authentication,
       deposit: deposit,
     );
@@ -139,6 +154,7 @@ class CoinData {
 
   Future addTransfer(Transfer transfer) async {
     await api_accessor.createTransfer(
+      browserClient: browserClient,
       authentication: authentication,
       transfer: transfer,
     );
@@ -148,6 +164,7 @@ class CoinData {
 
   Future updateTransfer(Transfer transfer) async {
     await api_accessor.updateTransfer(
+      browserClient: browserClient,
       authentication: authentication,
       transfer: transfer,
     );
@@ -157,6 +174,7 @@ class CoinData {
 
   Future addWallet(Wallet wallet) async {
     await api_accessor.createWallet(
+      browserClient: browserClient,
       authentication: authentication,
       wallet: wallet,
     );
@@ -166,6 +184,7 @@ class CoinData {
 
   Future updateWallet(Wallet wallet) async {
     await api_accessor.updateWallet(
+      browserClient: browserClient,
       authentication: authentication,
       wallet: wallet,
     );
@@ -175,6 +194,7 @@ class CoinData {
 
   Future addWithdrawal(Withdrawal withdrawal) async {
     await api_accessor.createWithdrawal(
+      browserClient: browserClient,
       authentication: authentication,
       withdrawal: withdrawal,
     );
@@ -184,6 +204,7 @@ class CoinData {
 
   Future updateWithdrawal(Withdrawal withdrawal) async {
     await api_accessor.updateWithdrawal(
+      browserClient: browserClient,
       authentication: authentication,
       withdrawal: withdrawal,
     );
