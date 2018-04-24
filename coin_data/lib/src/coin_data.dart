@@ -247,7 +247,13 @@ class CoinData {
     );
   }
 
+  List<WalletData> get allWalletData {
+    return wallets.map((wallet) => walletData(wallet.id)).toList();
+  }
+
   WalletData walletData(int walletId) {
+    Wallet wallet = wallets[walletId];
+    Currency currency = currencies[wallet.currencyId];
     List<ITransaction> transactions = <ITransaction>[];
 
     transactions.addAll(
@@ -270,7 +276,8 @@ class CoinData {
     );
 
     return new WalletData(
-      wallet: wallet(walletId),
+      wallet: wallet,
+      currency: currency,
       transactions: transactions,
     );
   }

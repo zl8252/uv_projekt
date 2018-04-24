@@ -4,14 +4,16 @@ import 'raw/all.dart';
 
 @immutable
 class WalletData {
-  final Wallet wallet;
-
-  final List<ITransaction> transactions;
-
   WalletData({
     @required this.wallet,
+    @required this.currency,
     @required this.transactions,
   });
+
+  final Wallet wallet;
+  final Currency currency;
+
+  final List<ITransaction> transactions;
 
   List<Deposit> get deposits => transactions
       .where(

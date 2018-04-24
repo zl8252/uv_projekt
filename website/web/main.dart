@@ -6,6 +6,8 @@ import 'package:http/browser_client.dart';
 
 import 'package:coin_data/coin_data.dart';
 
+import 'populators/all.dart';
+
 BrowserClient browserClient;
 
 CoinData coinData;
@@ -13,19 +15,21 @@ CoinData coinData;
 // Webpage components
 TableElement tableWallets;
 
+// Populators
+TableWalletsPopulator tableWalletsPopulator;
+
 Future<Null> main() async {
-  findAllWebpageComponents();
+  initWebpageComponentsAndPopulators();
 
   browserClient = new BrowserClient();
   await initCoinData();
 
-  for (Wallet wallet in coinData.wallets){
-    print(wallet);
-  }
+  populateAll();
 }
 
-void findAllWebpageComponents() {
+void initWebpageComponentsAndPopulators() {
   tableWallets = querySelector(".tableWallets");
+  tableWalletsPopulator = new TableWalletsPopulator(table: tableWallets);
 }
 
 Future<Null> initCoinData() async {
@@ -39,4 +43,13 @@ Future<Null> initCoinData() async {
   await coinData.refreshAllData();
 
   print("Coin data initialised");
+}
+
+void populateAll() {
+  List<WalletData> allWalletData = coinData.allWalletData;
+
+  tableWalletsPopulator.populate(
+    allWalletData: allWalletData,
+    onClicked: (int clickedWalletId) {},
+  );
 }
