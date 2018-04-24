@@ -4,28 +4,28 @@ table, th, td {
   border: 1px solid black;
 }
 
-.wrapperContent {
+#wrapperContent {
   margin-left: 200px
 }
 
-.leftContent {
+#leftContent {
   float: left;
   width: 200px;
   margin-left: -200px;
   background-color: #BDBDBD;
 }
 
-.centerContent {
+#centerContent {
   float: right;
   width: 100%;
   height: 100%;
   background-color: #FAFAFA;
 }
 
-.webpageTitle {
+#webpageTitle {
   color: #FF5722;
 }
 
-.tableWallets {
+#tableWallets {
   width: 100%;
 }

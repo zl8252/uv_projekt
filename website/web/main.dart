@@ -4,8 +4,7 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:http/browser_client.dart';
 
-import 'package:coin_data/coin_data.dart';
-
+import 'coin_data/coin_data.dart';
 import 'populators/all.dart';
 
 BrowserClient browserClient;
@@ -28,7 +27,17 @@ Future<Null> main() async {
 }
 
 void initWebpageComponentsAndPopulators() {
-  tableWallets = querySelector(".tableWallets");
+  ButtonElement clearAllButton = querySelector("#clearAllButton");
+  clearAllButton.addEventListener("click", (_){
+    clearAll();
+  });
+
+  ButtonElement populateAllButton = querySelector("#populateAllButton");
+  populateAllButton.addEventListener("click", (_){
+    populateAll();
+  });
+
+  tableWallets = querySelector("#tableWallets");
   tableWalletsPopulator = new TableWalletsPopulator(table: tableWallets);
 }
 
@@ -50,6 +59,12 @@ void populateAll() {
 
   tableWalletsPopulator.populate(
     allWalletData: allWalletData,
-    onClicked: (int clickedWalletId) {},
+    onClick: (int clickedWalletId) {
+      print("Clicked on wallet id:$clickedWalletId");
+    },
   );
+}
+
+void clearAll(){
+  tableWalletsPopulator.clear();
 }
