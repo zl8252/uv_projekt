@@ -10,15 +10,22 @@ BrowserClient browserClient;
 
 CoinData coinData;
 
-Future<Null> main() async {
-  browserClient = new BrowserClient();
-  querySelector('#output').text = 'Your Dart app is running.';
+// Webpage components
+TableElement tableWallets;
 
+Future<Null> main() async {
+  findAllWebpageComponents();
+
+  browserClient = new BrowserClient();
   await initCoinData();
 
   for (Wallet wallet in coinData.wallets){
     print(wallet);
   }
+}
+
+void findAllWebpageComponents() {
+  tableWallets = querySelector(".tableWallets");
 }
 
 Future<Null> initCoinData() async {
