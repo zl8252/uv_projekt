@@ -11,11 +11,27 @@ BrowserClient browserClient;
 
 CoinData coinData;
 
-// Webpage components
+int selectedWalletId;
+
+// Webpage components ------------------------------------------
+
+// wallets
 TableElement tableWallets;
+
+// Add
+var tableCellDeposit;
+var tableCellWithdrawal;
+var tableCellTransfer;
+
+var addContent;
+
+// table tansactions
+TableElement tableUnconfirmed;
+TableElement tableConfirmed;
 
 // Populators
 TableWalletsPopulator tableWalletsPopulator;
+TableTransactionsPopulator tableTransactionsPopulator;
 
 Future<Null> main() async {
   initWebpageComponentsAndPopulators();
@@ -28,17 +44,44 @@ Future<Null> main() async {
 
 void initWebpageComponentsAndPopulators() {
   ButtonElement clearAllButton = querySelector("#clearAllButton");
-  clearAllButton.addEventListener("click", (_){
+  clearAllButton.addEventListener("click", (_) {
     clearAll();
   });
 
   ButtonElement populateAllButton = querySelector("#populateAllButton");
-  populateAllButton.addEventListener("click", (_){
+  populateAllButton.addEventListener("click", (_) {
     populateAll();
   });
 
+  // Table Wallets
   tableWallets = querySelector("#tableWallets");
   tableWalletsPopulator = new TableWalletsPopulator(table: tableWallets);
+
+  // Add
+  tableCellDeposit = querySelector("#tableCellDeposit");
+  tableCellDeposit.addEventListener("click", (_) {
+    onTableCellDeposit();
+  });
+
+  tableCellWithdrawal = querySelector("#tableCellWithdrawal");
+  tableCellWithdrawal.addEventListener("click", (_) {
+    onTableCellWithdrawal();
+  });
+
+  tableCellTransfer = querySelector("#tableCellTransfer");
+  tableCellTransfer.addEventListener("click", (_) {
+    onTableCellTransfer();
+  });
+
+  // Tables transaction
+  tableUnconfirmed = querySelector("#tableUnconfirmed");
+  tableConfirmed = querySelector("#tableConfirmed");
+  tableTransactionsPopulator = new TableTransactionsPopulator(
+    unconfirmedTable: tableUnconfirmed,
+    confirmedTable: tableConfirmed,
+  );
+
+  addContent = querySelector("#addContent");
 }
 
 Future<Null> initCoinData() async {
@@ -51,20 +94,47 @@ Future<Null> initCoinData() async {
 
   await coinData.refreshAllData();
 
+  selectedWalletId = coinData.allWalletData.first.wallet.id;
+
   print("Coin data initialised");
 }
 
 void populateAll() {
-  List<WalletData> allWalletData = coinData.allWalletData;
+  clearAll();
 
   tableWalletsPopulator.populate(
-    allWalletData: allWalletData,
-    onClick: (int clickedWalletId) {
-      print("Clicked on wallet id:$clickedWalletId");
-    },
+    allWalletData: coinData.allWalletData,
+    onClick: onWalletSelected,
+  );
+
+  tableTransactionsPopulator.populate(
+    walletData: coinData.walletData(selectedWalletId),
+    coinData: coinData
   );
 }
 
-void clearAll(){
+void onWalletSelected(int walletId) {
+  print("Wallet with id: $walletId selected");
+
+  selectedWalletId = walletId;
+  populateAll();
+}
+
+void clearAll() {
   tableWalletsPopulator.clear();
+  tableTransactionsPopulator.clear();
+}
+
+// Add -----------------------------------------------------------------------------
+
+void onTableCellDeposit() {
+  print("selected add/Deposit");
+}
+
+void onTableCellWithdrawal() {
+  print("selected add/Withdrawal");
+}
+
+void onTableCellTransfer() {
+  print("selected add/Transfer");
 }

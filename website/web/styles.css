@@ -29,3 +29,31 @@ table, th, td {
 #tableWallets {
   width: 100%;
 }
+
+#tableAdd {
+  width: 100%
+}
+
+.wallet {
+  width: 100%;
+}
+
+#tableUnconfirmed {
+  width: 100%;
+}
+
+#tableConfirmed {
+  width: 100%;
+}
+
+.transactionDepositTable {
+  width: 100%;
+}
+
+.transactionWithdrawalTable {
+  width: 100%;
+}
+
+.transactionTransferTable {
+  width: 100%;
+}
