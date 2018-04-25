@@ -38,6 +38,14 @@ table, th, td {
   width: 100%;
 }
 
+#tableStatus {
+  width: 100%;
+}
+
+.tableStatusInnerTable {
+  width: 100%;
+}
+
 #tableUnconfirmed {
   width: 100%;
 }

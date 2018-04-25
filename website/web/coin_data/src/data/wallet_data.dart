@@ -42,6 +42,30 @@ class WalletData {
       )
       .toList();
 
+  double get confirmedDeposited {
+    double r = 0.0;
+
+    for (Deposit deposit in deposits){
+      if (deposit.completed){
+        r += deposit.amount;
+      }
+    }
+
+    return r;
+  }
+
+  double get confirmedWithdrawaled {
+    double r = 0.0;
+
+    for (Withdrawal withdrawal in withdrawals){
+      if (withdrawal.completed){
+        r += withdrawal.amount;
+      }
+    }
+
+    return r;
+  }
+
   double get confirmedBalance {
     double r = 0.0;
 

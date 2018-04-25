@@ -25,6 +25,9 @@ var tableCellTransfer;
 
 var addContent;
 
+// status
+TableElement tableStatus;
+
 // table tansactions
 TableElement tableUnconfirmed;
 TableElement tableConfirmed;
@@ -32,6 +35,7 @@ TableElement tableConfirmed;
 // Populators
 TableWalletsPopulator tableWalletsPopulator;
 TableTransactionsPopulator tableTransactionsPopulator;
+ContentStatusPopulator contentStatusPopulator;
 
 Future<Null> main() async {
   initWebpageComponentsAndPopulators();
@@ -73,6 +77,12 @@ void initWebpageComponentsAndPopulators() {
     onTableCellTransfer();
   });
 
+  // table status
+  tableStatus = querySelector("#tableStatus");
+  contentStatusPopulator = new ContentStatusPopulator(
+    statusTable: tableStatus,
+  );
+
   // Tables transaction
   tableUnconfirmed = querySelector("#tableUnconfirmed");
   tableConfirmed = querySelector("#tableConfirmed");
@@ -109,7 +119,11 @@ void populateAll() {
 
   tableTransactionsPopulator.populate(
     walletData: coinData.walletData(selectedWalletId),
-    coinData: coinData
+    coinData: coinData,
+  );
+
+  contentStatusPopulator.populate(
+    coinData.walletData(selectedWalletId),
   );
 }
 
@@ -123,6 +137,7 @@ void onWalletSelected(int walletId) {
 void clearAll() {
   tableWalletsPopulator.clear();
   tableTransactionsPopulator.clear();
+  contentStatusPopulator.clear();
 }
 
 // Add -----------------------------------------------------------------------------
