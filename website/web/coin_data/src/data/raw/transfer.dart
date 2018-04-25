@@ -37,6 +37,9 @@ class Transfer extends ITransaction implements Comparable<Transfer> {
     num fromWalletAmount = fields["from_wallet_amount"];
     num toWalletAmount = fields["to_wallet_amount"];
 
+    bool completed = fields["completed"];
+    completed ??= false;
+
     return new Transfer(
       airtableId: json["id"],
       id: fields["id"],
@@ -45,7 +48,7 @@ class Transfer extends ITransaction implements Comparable<Transfer> {
       fromWalletAmount: fromWalletAmount.toDouble(),
       toWalletId: fields["to_wallet_id"],
       toWalletAmount: toWalletAmount.toDouble(),
-      completed: fields["completed"],
+      completed: completed,
     );
   }
 

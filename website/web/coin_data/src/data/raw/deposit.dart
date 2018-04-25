@@ -29,6 +29,8 @@ class Deposit extends ITransaction implements Comparable<Deposit> {
     Map fields = json["fields"];
 
     num amount = fields["amount"];
+    bool completed = fields["completed"];
+    completed ??= false;
 
     return new Deposit(
       airtableId: json["id"],
@@ -36,7 +38,7 @@ class Deposit extends ITransaction implements Comparable<Deposit> {
       timeStamp: fields["timestamp"],
       toWalletId: fields["to_wallet_id"],
       amount: amount.toDouble(),
-      completed: fields["completed"],
+      completed: completed,
     );
   }
 

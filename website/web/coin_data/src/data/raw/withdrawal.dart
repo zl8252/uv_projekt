@@ -29,6 +29,8 @@ class Withdrawal extends ITransaction implements Comparable<Withdrawal> {
     Map fields = json["fields"];
 
     num amount = fields["amount"];
+    bool completed = fields["completed"];
+    completed ??= false;
 
     return new Withdrawal(
       airtableId: json["id"],
@@ -36,7 +38,7 @@ class Withdrawal extends ITransaction implements Comparable<Withdrawal> {
       timeStamp: fields["timestamp"],
       fromWalletId: fields["from_wallet_id"],
       amount: amount.toDouble(),
-      completed: fields["completed"],
+      completed: completed,
     );
   }
 
