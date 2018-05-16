@@ -291,4 +291,34 @@ class CoinData {
       transactions: transactions,
     );
   }
+
+  int generateNewDepositId() {
+    int maxId = -10;
+    for (Deposit deposit in deposits) {
+      if (deposit.id > maxId) {
+        maxId = deposit.id;
+      }
+    }
+    return maxId + 1;
+  }
+
+  int generateNewWithdrawalId() {
+    int maxId = -10;
+    for (Withdrawal withdrawal in withdrawals) {
+      if (withdrawal.id > maxId) {
+        maxId = withdrawal.id;
+      }
+    }
+    return maxId + 1;
+  }
+
+  int generateNewTransferId() {
+    int maxId = -10;
+    for (Transfer transfer in transfers) {
+      if (transfer.id > maxId) {
+        maxId = transfer.id;
+      }
+    }
+    return maxId + 1;
+  }
 }

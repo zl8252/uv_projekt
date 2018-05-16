@@ -18,13 +18,6 @@ int selectedWalletId;
 // wallets
 TableElement tableWallets;
 
-// Add
-var tableCellDeposit;
-var tableCellWithdrawal;
-var tableCellTransfer;
-
-var addContent;
-
 // status
 TableElement tableStatus;
 
@@ -34,6 +27,7 @@ TableElement tableConfirmed;
 
 // Populators
 TableWalletsPopulator tableWalletsPopulator;
+AddPopulator addPopulator;
 TableTransactionsPopulator tableTransactionsPopulator;
 ContentStatusPopulator contentStatusPopulator;
 
@@ -62,20 +56,12 @@ void initWebpageComponentsAndPopulators() {
   tableWalletsPopulator = new TableWalletsPopulator(table: tableWallets);
 
   // Add
-  tableCellDeposit = querySelector("#tableCellDeposit");
-  tableCellDeposit.addEventListener("click", (_) {
-    onTableCellDeposit();
-  });
-
-  tableCellWithdrawal = querySelector("#tableCellWithdrawal");
-  tableCellWithdrawal.addEventListener("click", (_) {
-    onTableCellWithdrawal();
-  });
-
-  tableCellTransfer = querySelector("#tableCellTransfer");
-  tableCellTransfer.addEventListener("click", (_) {
-    onTableCellTransfer();
-  });
+  DivElement addDivNavigation = querySelector("#addDivNavigation");
+  DivElement addDivContent = querySelector("#addDivContent");
+  addPopulator = new AddPopulator(
+    addDivNavigation: addDivNavigation,
+    addDivContent: addDivContent,
+  );
 
   // table status
   tableStatus = querySelector("#tableStatus");
@@ -90,8 +76,6 @@ void initWebpageComponentsAndPopulators() {
     unconfirmedTable: tableUnconfirmed,
     confirmedTable: tableConfirmed,
   );
-
-  addContent = querySelector("#addContent");
 }
 
 Future<Null> initCoinData() async {
@@ -117,6 +101,18 @@ void populateAll() {
     onClick: onWalletSelected,
   );
 
+  // Add
+  addPopulator.populate(
+    coinData: coinData,
+    currentWalletData: coinData.walletData(selectedWalletId),
+    onRefresh: () {
+      clearAll();
+      initCoinData().then((_) {
+        populateAll();
+      });
+    },
+  );
+
   tableTransactionsPopulator.populate(
     walletData: coinData.walletData(selectedWalletId),
     coinData: coinData,
@@ -136,20 +132,9 @@ void onWalletSelected(int walletId) {
 
 void clearAll() {
   tableWalletsPopulator.clear();
+  addPopulator.clear();
   tableTransactionsPopulator.clear();
   contentStatusPopulator.clear();
 }
 
 // Add -----------------------------------------------------------------------------
-
-void onTableCellDeposit() {
-  print("selected add/Deposit");
-}
-
-void onTableCellWithdrawal() {
-  print("selected add/Withdrawal");
-}
-
-void onTableCellTransfer() {
-  print("selected add/Transfer");
-}
