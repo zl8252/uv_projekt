@@ -28,8 +28,8 @@ TableElement tableConfirmed;
 // Populators
 TableWalletsPopulator tableWalletsPopulator;
 AddPopulator addPopulator;
+StatusPopulator statusPopulator;
 TableTransactionsPopulator tableTransactionsPopulator;
-ContentStatusPopulator contentStatusPopulator;
 
 Future<Null> main() async {
   initWebpageComponentsAndPopulators();
@@ -63,10 +63,10 @@ void initWebpageComponentsAndPopulators() {
     addDivContent: addDivContent,
   );
 
-  // table status
-  tableStatus = querySelector("#tableStatus");
-  contentStatusPopulator = new ContentStatusPopulator(
-    statusTable: tableStatus,
+  // Status
+  DivElement statusDiv = querySelector("#statusDiv");
+  statusPopulator = new StatusPopulator(
+    statusDiv: statusDiv,
   );
 
   // Tables transaction
@@ -118,7 +118,7 @@ void populateAll() {
     coinData: coinData,
   );
 
-  contentStatusPopulator.populate(
+  statusPopulator.populate(
     coinData.walletData(selectedWalletId),
   );
 }
@@ -133,8 +133,8 @@ void onWalletSelected(int walletId) {
 void clearAll() {
   tableWalletsPopulator.clear();
   addPopulator.clear();
+  statusPopulator.clear();
   tableTransactionsPopulator.clear();
-  contentStatusPopulator.clear();
 }
 
 // Add -----------------------------------------------------------------------------

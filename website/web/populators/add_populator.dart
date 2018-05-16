@@ -6,8 +6,8 @@ import 'callbacks.dart';
 import '../coin_data/coin_data.dart';
 
 class AddPopulator {
-  DivElement addDivNavigation;
-  DivElement addDivContent;
+  final DivElement addDivNavigation;
+  final DivElement addDivContent;
 
   AddPopulator({
     @required this.addDivNavigation,
