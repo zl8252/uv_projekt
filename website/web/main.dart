@@ -26,7 +26,7 @@ TableElement tableUnconfirmed;
 TableElement tableConfirmed;
 
 // Populators
-TableWalletsPopulator tableWalletsPopulator;
+WalletsPopulator walletsPopulator;
 AddPopulator addPopulator;
 StatusPopulator statusPopulator;
 TableTransactionsPopulator tableTransactionsPopulator;
@@ -51,9 +51,11 @@ void initWebpageComponentsAndPopulators() {
     populateAll();
   });
 
-  // Table Wallets
-  tableWallets = querySelector("#tableWallets");
-  tableWalletsPopulator = new TableWalletsPopulator(table: tableWallets);
+  // Wallets
+  DivElement walletsDiv = querySelector("#walletsDiv");
+  walletsPopulator = new WalletsPopulator(
+    walletsDiv: walletsDiv,
+  );
 
   // Add
   DivElement addDivNavigation = querySelector("#addDivNavigation");
@@ -96,7 +98,7 @@ Future<Null> initCoinData() async {
 void populateAll() {
   clearAll();
 
-  tableWalletsPopulator.populate(
+  walletsPopulator.populate(
     allWalletData: coinData.allWalletData,
     onClick: onWalletSelected,
   );
@@ -131,7 +133,7 @@ void onWalletSelected(int walletId) {
 }
 
 void clearAll() {
-  tableWalletsPopulator.clear();
+  walletsPopulator.clear();
   addPopulator.clear();
   statusPopulator.clear();
   tableTransactionsPopulator.clear();
