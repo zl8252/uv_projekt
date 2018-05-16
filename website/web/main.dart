@@ -1,7 +1,6 @@
 import 'dart:html';
 import 'dart:async';
 
-import 'package:meta/meta.dart';
 import 'package:http/browser_client.dart';
 
 import 'coin_data/coin_data.dart';
@@ -29,6 +28,7 @@ TableElement tableConfirmed;
 WalletsPopulator walletsPopulator;
 AddPopulator addPopulator;
 StatusPopulator statusPopulator;
+UnconfiemedPopulator unconfiemedPopulator;
 TableTransactionsPopulator tableTransactionsPopulator;
 
 Future<Null> main() async {
@@ -71,6 +71,12 @@ void initWebpageComponentsAndPopulators() {
     statusDiv: statusDiv,
   );
 
+  // Unconfirmed
+  DivElement unconfirmedDiv = querySelector("#unconfirmedDiv");
+  unconfiemedPopulator = new UnconfiemedPopulator(
+    unconfirmedDiv: unconfirmedDiv,
+  );
+
   // Tables transaction
   tableUnconfirmed = querySelector("#tableUnconfirmed");
   tableConfirmed = querySelector("#tableConfirmed");
@@ -98,6 +104,7 @@ Future<Null> initCoinData() async {
 void populateAll() {
   clearAll();
 
+  // Wallets
   walletsPopulator.populate(
     allWalletData: coinData.allWalletData,
     onClick: onWalletSelected,
@@ -115,13 +122,26 @@ void populateAll() {
     },
   );
 
+  // Status
+  statusPopulator.populate(
+    coinData.walletData(selectedWalletId),
+  );
+
+  // Unconfirmed
+  unconfiemedPopulator.populate(
+    coinData: coinData,
+    walletData: coinData.walletData(selectedWalletId),
+    onRefresh: (){
+      clearAll();
+      initCoinData().then((_){
+        populateAll();
+      });
+    }
+  );
+
   tableTransactionsPopulator.populate(
     walletData: coinData.walletData(selectedWalletId),
     coinData: coinData,
-  );
-
-  statusPopulator.populate(
-    coinData.walletData(selectedWalletId),
   );
 }
 
@@ -136,6 +156,7 @@ void clearAll() {
   walletsPopulator.clear();
   addPopulator.clear();
   statusPopulator.clear();
+  unconfiemedPopulator.clear();
   tableTransactionsPopulator.clear();
 }
 

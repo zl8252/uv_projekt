@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:http/browser_client.dart';
+import 'package:http/http.dart';
 import 'dart:convert';
 
 import '../authentication.dart';
@@ -75,10 +76,11 @@ Future<String> updateTransfer({
     }
   });
 
-  return (await browserClient.post(
+   Response response = await browserClient.put(
     url,
     headers: authentication.header,
     body: body,
-  ))
-      .body;
+  );
+
+  return response.body;
 }
