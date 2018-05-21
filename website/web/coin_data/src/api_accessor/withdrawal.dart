@@ -78,3 +78,18 @@ Future<String> updateWithdrawal({
   ))
       .body;
 }
+
+Future<String> deleteWithdrawal({
+  @required BrowserClient browserClient,
+  @required Authentication authentication,
+  @required Withdrawal withdrawal,
+}) async {
+  String url =
+      "https://api.airtable.com/v0/appDbu7XVhfQDRmIH/Withdrawal_Log/${withdrawal.airtableId}";
+
+  return (await browserClient.delete(
+    url,
+    headers: authentication.header,
+  ))
+      .body;
+}

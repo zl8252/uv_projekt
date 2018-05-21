@@ -78,3 +78,18 @@ Future<String> updateDeposit({
   ))
       .body;
 }
+
+Future<String> deleteDeposit({
+  @required BrowserClient browserClient,
+  @required Authentication authentication,
+  @required Deposit deposit,
+}) async {
+  String url =
+      "https://api.airtable.com/v0/appDbu7XVhfQDRmIH/Deposit_Log/${deposit.airtableId}";
+
+  return (await browserClient.delete(
+    url,
+    headers: authentication.header,
+  ))
+      .body;
+}

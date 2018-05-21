@@ -162,6 +162,14 @@ class CoinData {
     await refreshDeposits();
   }
 
+  Future deleteDeposit(Deposit deposit) async {
+    await api_accessor.deleteDeposit(
+      browserClient: browserClient,
+      authentication: authentication,
+      deposit: deposit,
+    );
+  }
+
   Future addTransfer(Transfer transfer) async {
     await api_accessor.createTransfer(
       browserClient: browserClient,
@@ -180,6 +188,14 @@ class CoinData {
     );
 
     await refreshTransfers();
+  }
+
+  Future deleteTransfer(Transfer transfer) async {
+    await api_accessor.deleteTransfer(
+      browserClient: browserClient,
+      authentication: authentication,
+      transfer: transfer,
+    );
   }
 
   Future addWallet(Wallet wallet) async {
@@ -220,6 +236,14 @@ class CoinData {
     );
 
     await refreshWithdrawals();
+  }
+
+  Future deleteWithdrawal(Withdrawal withdrawal) async {
+    await api_accessor.deleteWithdrawal(
+      browserClient: browserClient,
+      authentication: authentication,
+      withdrawal: withdrawal,
+    );
   }
 
   Currency currency(int id) {

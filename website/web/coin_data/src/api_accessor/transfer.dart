@@ -84,3 +84,18 @@ Future<String> updateTransfer({
 
   return response.body;
 }
+
+Future<String> deleteTransfer({
+  @required BrowserClient browserClient,
+  @required Authentication authentication,
+  @required Transfer transfer,
+}) async {
+  String url =
+      "https://api.airtable.com/v0/appDbu7XVhfQDRmIH/Deposit_Log/${transfer.airtableId}";
+
+  return (await browserClient.delete(
+    url,
+    headers: authentication.header,
+  ))
+      .body;
+}
