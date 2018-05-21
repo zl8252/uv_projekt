@@ -33,16 +33,22 @@ class UnconfiemedPopulator {
         }
 
         Element element = _buildDeposit(
-          deposit: transaction,
-          walletData: walletData,
-          onChanged: (Deposit newDeposit) {
-            coinData.updateDeposit(newDeposit).then(
-              (_) {
-                onRefresh();
-              },
-            );
-          },
-        );
+            deposit: transaction,
+            walletData: walletData,
+            onChanged: (Deposit newDeposit) {
+              coinData.updateDeposit(newDeposit).then(
+                (_) {
+                  onRefresh();
+                },
+              );
+            },
+            onDelete: (Deposit deposit) {
+              coinData.deleteDeposit(deposit).then(
+                (_) {
+                  onRefresh();
+                },
+              );
+            });
 
         unconfirmedDiv.children.add(element);
       }
@@ -63,6 +69,13 @@ class UnconfiemedPopulator {
               },
             );
           },
+          onDelete: (Withdrawal withdrawal) {
+            coinData.deleteWithdrawal(withdrawal).then(
+              (_) {
+                onRefresh();
+              },
+            );
+          },
         );
 
         unconfirmedDiv.children.add(element);
@@ -78,9 +91,18 @@ class UnconfiemedPopulator {
           coinData: coinData,
           walletData: walletData,
           onChanged: (Transfer newTransfer) {
-            coinData.updateTransfer(newTransfer).then((String s){
-              onRefresh();
-            },);
+            coinData.updateTransfer(newTransfer).then(
+              (String s) {
+                onRefresh();
+              },
+            );
+          },
+          onDelete: (Transfer transfer) {
+            coinData.deleteTransfer(transfer).then(
+              (_) {
+                onRefresh();
+              },
+            );
           },
         );
 
@@ -93,6 +115,7 @@ class UnconfiemedPopulator {
     @required Deposit deposit,
     @required WalletData walletData,
     @required DepositCallback onChanged,
+    @required DepositCallback onDelete,
   }) {
     TableElement r = new TableElement();
 
@@ -105,10 +128,20 @@ class UnconfiemedPopulator {
     ButtonElement buttonConfirm = new ButtonElement();
     row.addCell().children.add(buttonConfirm);
     buttonConfirm.innerHtml = "Confirm";
-    buttonConfirm.addEventListener("click", (_) {
-      Deposit newDeposit = deposit.copyWith(completed: true);
+    buttonConfirm.addEventListener(
+      "click",
+      (_) {
+        Deposit newDeposit = deposit.copyWith(completed: true);
 
-      onChanged(newDeposit);
+        onChanged(newDeposit);
+      },
+    );
+
+    ButtonElement buttonDelete = new ButtonElement();
+    row.addCell().children.add(buttonDelete);
+    buttonDelete.innerHtml = "Delete";
+    buttonDelete.addEventListener("click", (_) {
+      onDelete(deposit);
     });
 
     return r;
@@ -118,6 +151,7 @@ class UnconfiemedPopulator {
     @required Withdrawal withdrawal,
     @required WalletData walletData,
     @required WithdrawalCallback onChanged,
+    @required WithdrawalCallback onDelete,
   }) {
     TableElement r = new TableElement();
 
@@ -130,11 +164,24 @@ class UnconfiemedPopulator {
     ButtonElement buttonConfirm = new ButtonElement();
     row.addCell().children.add(buttonConfirm);
     buttonConfirm.innerHtml = "Confirm";
-    buttonConfirm.addEventListener("click", (_) {
-      Withdrawal newWithdrawal = withdrawal.copyWith(complete: true);
+    buttonConfirm.addEventListener(
+      "click",
+      (_) {
+        Withdrawal newWithdrawal = withdrawal.copyWith(complete: true);
 
-      onChanged(newWithdrawal);
-    });
+        onChanged(newWithdrawal);
+      },
+    );
+
+    ButtonElement buttonDelete = new ButtonElement();
+    row.addCell().children.add(buttonDelete);
+    buttonDelete.innerHtml = "Delete";
+    buttonDelete.addEventListener(
+      "click",
+      (_) {
+        onDelete(withdrawal);
+      },
+    );
 
     return r;
   }
@@ -144,6 +191,7 @@ class UnconfiemedPopulator {
     @required CoinData coinData,
     @required WalletData walletData,
     @required TransferCallback onChanged,
+    @required TransferCallback onDelete,
   }) {
     TableElement r = new TableElement();
 
@@ -164,11 +212,24 @@ class UnconfiemedPopulator {
     ButtonElement buttonConfirm = new ButtonElement();
     row.addCell().children.add(buttonConfirm);
     buttonConfirm.innerHtml = "Confirm";
-    buttonConfirm.addEventListener("click", (_) {
-      Transfer newTransfer = transfer.copyWith(completed: true);
+    buttonConfirm.addEventListener(
+      "click",
+      (_) {
+        Transfer newTransfer = transfer.copyWith(completed: true);
 
-      onChanged(newTransfer);
-    });
+        onChanged(newTransfer);
+      },
+    );
+
+    ButtonElement buttonDelete = new ButtonElement();
+    row.addCell().children.add(buttonDelete);
+    buttonDelete.innerHtml = "Delete";
+    buttonDelete.addEventListener(
+      "click",
+      (_) {
+        onDelete(transfer);
+      },
+    );
 
     return r;
   }
