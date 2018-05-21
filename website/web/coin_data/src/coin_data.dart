@@ -39,6 +39,16 @@ class CoinData {
     );
   }
 
+  Wallet getWallet(int walletId) {
+    return wallets.firstWhere((wallet) => wallet.id == walletId,
+        orElse: () => null);
+  }
+
+  Currency getCurrency(int currencyId) {
+    return currencies.firstWhere((currency) => currency.id == currencyId,
+        orElse: () => null);
+  }
+
   Future refreshAllData() async {
     await refreshCurrencies();
     await refreshDeposits();
@@ -152,6 +162,14 @@ class CoinData {
     await refreshDeposits();
   }
 
+  Future deleteDeposit(Deposit deposit) async {
+    await api_accessor.deleteDeposit(
+      browserClient: browserClient,
+      authentication: authentication,
+      deposit: deposit,
+    );
+  }
+
   Future addTransfer(Transfer transfer) async {
     await api_accessor.createTransfer(
       browserClient: browserClient,
@@ -170,6 +188,14 @@ class CoinData {
     );
 
     await refreshTransfers();
+  }
+
+  Future deleteTransfer(Transfer transfer) async {
+    await api_accessor.deleteTransfer(
+      browserClient: browserClient,
+      authentication: authentication,
+      transfer: transfer,
+    );
   }
 
   Future addWallet(Wallet wallet) async {
@@ -212,6 +238,14 @@ class CoinData {
     await refreshWithdrawals();
   }
 
+  Future deleteWithdrawal(Withdrawal withdrawal) async {
+    await api_accessor.deleteWithdrawal(
+      browserClient: browserClient,
+      authentication: authentication,
+      withdrawal: withdrawal,
+    );
+  }
+
   Currency currency(int id) {
     return currencies.firstWhere(
       (currency) => currency.id == id,
@@ -252,8 +286,8 @@ class CoinData {
   }
 
   WalletData walletData(int walletId) {
-    Wallet wallet = wallets[walletId];
-    Currency currency = currencies[wallet.currencyId];
+    Wallet wallet = getWallet(walletId);
+    Currency currency = getCurrency(wallet.currencyId);
     List<ITransaction> transactions = <ITransaction>[];
 
     transactions.addAll(
@@ -280,5 +314,35 @@ class CoinData {
       currency: currency,
       transactions: transactions,
     );
+  }
+
+  int generateNewDepositId() {
+    int maxId = -10;
+    for (Deposit deposit in deposits) {
+      if (deposit.id > maxId) {
+        maxId = deposit.id;
+      }
+    }
+    return maxId + 1;
+  }
+
+  int generateNewWithdrawalId() {
+    int maxId = -10;
+    for (Withdrawal withdrawal in withdrawals) {
+      if (withdrawal.id > maxId) {
+        maxId = withdrawal.id;
+      }
+    }
+    return maxId + 1;
+  }
+
+  int generateNewTransferId() {
+    int maxId = -10;
+    for (Transfer transfer in transfers) {
+      if (transfer.id > maxId) {
+        maxId = transfer.id;
+      }
+    }
+    return maxId + 1;
   }
 }
