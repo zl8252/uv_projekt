@@ -1,10 +1,139 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+#main_content {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #FAFAFA;
+}
 
-table, th, td {
+#main_content_two_column:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#main_content_left {
+  float: left;
+  width: 200px;
+}
+
+#content_left {
+  background-color: #FFE082;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+#main_content_right {
+  float: left;
+  width: 600px;
+}
+
+#content_right {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+/* ----------- Left */
+#title_1{
+  font-size: 40px;
+  font-weight: 600;
+  color: #212121;
+}
+
+#title_2{
+  font-size: 40px;
+  padding-left: 20px;
+  font-weight: 600;
+  color: #212121;
+
+  padding-bottom: 25px;
+}
+
+#walletsDiv > table, th, td {
+  width: 100%
+}
+
+.wallet_table {
+  padding-bottom: 10px;
+}
+
+.walletName {
+  font-size: 20px;
+  font-weight: 600;
+  color: #212121;
+  text-align: center;
+  background-color: #F57C00;
+}
+
+.currencyName {
+  color: #424242;
+}
+
+.walletBalance{
+  font-size: 18px;
+  font-weight: 600;
+  color: #212121;
+}
+
+/* ----------- Right */
+
+h2 {
+  background-color: #FFE082;
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 700;
+}
+
+/* Add*/
+
+#addDivNavigation table, #addDivNavigation td {
+  table-layout:fixed;
+  width: 100%;
+  text-align: center;
   border: 1px solid black;
 }
 
-#wrapperContent {
+#addDivNavigation {
+  padding-bottom: 10px;
+}
+
+.addSelected {
+  background-color: #F57C00;
+}
+
+#addDivContent {
+  width: 100%;
+}
+
+.addContentTable {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #EEEEEE;
+  padding: 20px;
+}
+
+#addDivContent table, #addDivContent td {
+  width: 50%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+/* ---------- OLD ----------*/
+
+/* table, th, td {
+  border: 1px solid black;
+} */
+
+/* #wrapperContent {
   margin-left: 200px
 }
 
@@ -64,4 +193,4 @@ table, th, td {
 
 .transactionTransferTable {
   width: 100%;
-}
+} */
