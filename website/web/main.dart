@@ -29,7 +29,7 @@ WalletsPopulator walletsPopulator;
 AddPopulator addPopulator;
 StatusPopulator statusPopulator;
 UnconfiemedPopulator unconfiemedPopulator;
-TableTransactionsPopulator tableTransactionsPopulator;
+ConfirmedPopulator confirmedPopulator;
 
 Future<Null> main() async {
   initWebpageComponentsAndPopulators();
@@ -77,12 +77,10 @@ void initWebpageComponentsAndPopulators() {
     unconfirmedDiv: unconfirmedDiv,
   );
 
-  // Tables transaction
-  tableUnconfirmed = querySelector("#tableUnconfirmed");
-  tableConfirmed = querySelector("#tableConfirmed");
-  tableTransactionsPopulator = new TableTransactionsPopulator(
-    unconfirmedTable: tableUnconfirmed,
-    confirmedTable: tableConfirmed,
+  // Confirmed
+  DivElement confirmedDiv = querySelector("#confirmedDiv");
+  confirmedPopulator = new ConfirmedPopulator(
+    confirmedDiv: confirmedDiv,
   );
 }
 
@@ -129,20 +127,25 @@ void populateAll() {
 
   // Unconfirmed
   unconfiemedPopulator.populate(
-    coinData: coinData,
-    walletData: coinData.walletData(selectedWalletId),
-    onRefresh: (){
-      clearAll();
-      initCoinData().then((_){
-        populateAll();
+      coinData: coinData,
+      walletData: coinData.walletData(selectedWalletId),
+      onRefresh: () {
+        clearAll();
+        initCoinData().then((_) {
+          populateAll();
+        });
       });
-    }
-  );
 
-  tableTransactionsPopulator.populate(
-    walletData: coinData.walletData(selectedWalletId),
-    coinData: coinData,
-  );
+  // Confirmed
+  confirmedPopulator.populate(
+      coinData: coinData,
+      walletData: coinData.walletData(selectedWalletId),
+      onRefresh: () {
+        clearAll();
+        initCoinData().then((_) {
+          populateAll();
+        });
+      });
 }
 
 void onWalletSelected(int walletId) {
@@ -157,7 +160,5 @@ void clearAll() {
   addPopulator.clear();
   statusPopulator.clear();
   unconfiemedPopulator.clear();
-  tableTransactionsPopulator.clear();
+  confirmedPopulator.clear();
 }
-
-// Add -----------------------------------------------------------------------------
