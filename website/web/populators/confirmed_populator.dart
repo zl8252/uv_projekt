@@ -183,6 +183,7 @@ class ConfirmedPopulator {
 
     TableRowElement row = r.addRow();
 
+    Wallet fromWallet = coinData.getWallet(transfer.fromWalletId);
     Wallet toWallet = coinData.getWallet(transfer.toWalletId);
 
     row.addCell()
@@ -190,11 +191,18 @@ class ConfirmedPopulator {
       ..innerHtml = "Transfer";
     row.addCell().innerHtml =
         "<span class=\"unconfirmedAmount\">${transfer.fromWalletAmount}</span>"
-        " ${walletData.currency.name}";
-    row.addCell()
-      ..classes.add("text_center")
-      ..innerHtml = "to <br>"
-          "<span class=\"unconfirmedAmount\"> ${toWallet.name}</span>";
+        " ${coinData.getCurrency(fromWallet.currencyId).name}";
+    if (fromWallet.id == walletData.wallet.id) {
+      row.addCell()
+        ..classes.add("text_center")
+        ..innerHtml = "to <br>"
+            "<span class=\"unconfirmedAmount\"> ${toWallet.name}</span>";
+    } else {
+            row.addCell()
+        ..classes.add("text_center")
+        ..innerHtml = "from <br>"
+            "<span class=\"unconfirmedAmount\"> ${fromWallet.name}</span>";
+    }
     row.addCell()
       ..classes.add("text_center")
       ..innerHtml = "as <br>"

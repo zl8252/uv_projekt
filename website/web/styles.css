@@ -6,7 +6,6 @@
   padding-right: 50px;
   padding-top: 25px;
   padding-bottom: 25px;
-  background-color: #FAFAFA;
 }
 
 #main_content_two_column:after{
@@ -36,7 +35,7 @@
 #content_right {
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 25px;
+  /* padding-top: 25px; */
   padding-bottom: 25px;
 }
 
@@ -101,6 +100,7 @@ h2 {
 #walletNameDiv {
   width: 100%;
   text-align: center;
+  padding-bottom: 25px;
 }
 
 /* Status */
