@@ -1,5 +1,5 @@
 #main_content {
-  width: 800px;
+  width: 900px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 50px;
@@ -38,6 +38,10 @@
   padding-right: 10px;
   padding-top: 25px;
   padding-bottom: 25px;
+}
+
+.text_center {
+  text-align: center;
 }
 
 /* ----------- Left */
@@ -93,7 +97,37 @@ h2 {
   font-weight: 700;
 }
 
-/* Add*/
+/* WalletName */
+#walletNameDiv {
+  width: 100%;
+  text-align: center;
+}
+
+/* Status */
+#statusTable{
+  width: 100%;
+  border: 1px solid black;
+}
+
+#statusTable td {
+  border: 1px solid black;
+  width: 25%;
+}
+
+.statusTable_title {
+  font-weight: bold;
+  color: #212121;
+  text-align: center;
+}
+
+.statusTable_value {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: right;
+}
+
+
+/* Add */
 
 #addDivNavigation table, #addDivNavigation td {
   table-layout:fixed;
@@ -127,70 +161,83 @@ h2 {
   border: 1px solid black;
 }
 
-/* ---------- OLD ----------*/
+/* Unconfirmed */
 
-/* table, th, td {
+.unconfirmedTransactionTitle {
+  font-weight: bold;
+  color: #212121;
+  text-align: left;
+}
+
+.unconfirmedAmount {
+  font-weight: 600;
+  color: #212121;
+}
+
+.unconfirmedDeposit {
+  width: 100%;
   border: 1px solid black;
-} */
-
-/* #wrapperContent {
-  margin-left: 200px
+  margin-bottom: 3px;
 }
 
-#leftContent {
-  float: left;
-  width: 200px;
-  margin-left: -200px;
-  background-color: #BDBDBD;
+.unconfirmedDeposit td {
+  width: 25%;
 }
 
-#centerContent {
-  float: right;
+.unconfirmedWithdrawal {
   width: 100%;
-  height: 100%;
-  background-color: #FAFAFA;
+  border: 1px solid black;
+  margin-bottom: 3px;
 }
 
-#webpageTitle {
-  color: #FF5722;
+.unconfirmedWithdrawal td {
+  width: 25%;
 }
 
-#tableWallets {
+.unconfirmedTransfer {
   width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
 }
 
-#tableAdd {
-  width: 100%
+.unconfirmedTransfer td {
+  width: 16.6%;
 }
 
-.wallet {
+/* Confirmed */
+
+.confirmedTransactionTitle {
+  font-weight: bold;
+  color: #212121;
+  text-align: left;
+}
+
+.confirmedDeposit {
   width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
 }
 
-#tableStatus {
-  width: 100%;
+.confirmedDeposit td {
+  width: 33.33%;
 }
 
-.tableStatusInnerTable {
+.confirmedWithdrawal {
   width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
 }
 
-#tableUnconfirmed {
-  width: 100%;
+.confirmedWithdrawal td {
+  width: 33.33%;
 }
 
-#tableConfirmed {
+.confirmedTransfer{
   width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
 }
 
-.transactionDepositTable {
-  width: 100%;
+.confirmedTransfer td {
+  width: 20%;
 }
-
-.transactionWithdrawalTable {
-  width: 100%;
-}
-
-.transactionTransferTable {
-  width: 100%;
-} */

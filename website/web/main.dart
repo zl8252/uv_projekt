@@ -25,6 +25,7 @@ TableElement tableUnconfirmed;
 TableElement tableConfirmed;
 
 // Populators
+WalletNamePopulator walletNamePopulator;
 WalletsPopulator walletsPopulator;
 AddPopulator addPopulator;
 StatusPopulator statusPopulator;
@@ -55,6 +56,12 @@ void initWebpageComponentsAndPopulators() {
   DivElement walletsDiv = querySelector("#walletsDiv");
   walletsPopulator = new WalletsPopulator(
     walletsDiv: walletsDiv,
+  );
+
+  // Wallet Name
+  DivElement walletNameDiv = querySelector("#walletNameDiv");
+  walletNamePopulator = new WalletNamePopulator(
+    walletNameDiv: walletNameDiv,
   );
 
   // Add
@@ -94,7 +101,9 @@ Future<Null> initCoinData() async {
 
   await coinData.refreshAllData();
 
-  selectedWalletId = coinData.allWalletData.first.wallet.id;
+  if (selectedWalletId == null) {
+    selectedWalletId = coinData.allWalletData.first.wallet.id;
+  }
 
   print("Coin data initialised");
 }
@@ -108,6 +117,16 @@ void populateAll() {
     onClick: onWalletSelected,
   );
 
+  // WalletName
+  walletNamePopulator.populate(
+    currentWallet: coinData.walletData(selectedWalletId),
+  );
+
+  // Status
+  statusPopulator.populate(
+    coinData.walletData(selectedWalletId),
+  );
+
   // Add
   addPopulator.populate(
     coinData: coinData,
@@ -118,11 +137,6 @@ void populateAll() {
         populateAll();
       });
     },
-  );
-
-  // Status
-  statusPopulator.populate(
-    coinData.walletData(selectedWalletId),
   );
 
   // Unconfirmed
@@ -157,6 +171,7 @@ void onWalletSelected(int walletId) {
 
 void clearAll() {
   walletsPopulator.clear();
+  walletNamePopulator.clear();
   addPopulator.clear();
   statusPopulator.clear();
   unconfiemedPopulator.clear();
