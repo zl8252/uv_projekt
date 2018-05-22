@@ -128,7 +128,6 @@ class UnconfiemedPopulator {
         "<span class=\"unconfirmedAmount\">${deposit.amount}</span> ${walletData.currency.name}";
 
     ButtonElement buttonConfirm = new ButtonElement();
-    row.addCell().children.add(buttonConfirm);
     buttonConfirm.innerHtml = "Confirm";
     buttonConfirm.addEventListener(
       "click",
@@ -140,11 +139,16 @@ class UnconfiemedPopulator {
     );
 
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell().children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener("click", (_) {
       onDelete(deposit);
     });
+
+    row.addCell()
+      ..classes.add("td_right")
+      ..children.add(buttonConfirm)
+      ..children.add(new BRElement())
+      ..children.add(buttonDelete);
 
     return r;
   }
@@ -167,7 +171,6 @@ class UnconfiemedPopulator {
         "<span class=\"unconfirmedAmount\">${withdrawal.amount}</span> ${walletData.currency.name}";
 
     ButtonElement buttonConfirm = new ButtonElement();
-    row.addCell().children.add(buttonConfirm);
     buttonConfirm.innerHtml = "Confirm";
     buttonConfirm.addEventListener(
       "click",
@@ -179,7 +182,6 @@ class UnconfiemedPopulator {
     );
 
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell().children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener(
       "click",
@@ -187,6 +189,12 @@ class UnconfiemedPopulator {
         onDelete(withdrawal);
       },
     );
+
+    row.addCell()
+      ..classes.add("td_right")
+      ..children.add(buttonConfirm)
+      ..children.add(new BRElement())
+      ..children.add(buttonDelete);
 
     return r;
   }
@@ -223,11 +231,12 @@ class UnconfiemedPopulator {
         ..innerHtml =
             "from <br> <span class=\"unconfirmedAmount\">${fromWallet.name}</span>";
     }
-    row.addCell()..classes.add("text_center")..innerHtml =
-        "as <br> <span class=\"unconfirmedAmount\">${transfer.toWalletAmount}</span> ${coinData.getCurrency(toWallet.currencyId).name}";
+    row.addCell()
+      ..classes.add("text_center")
+      ..innerHtml =
+          "as <br> <span class=\"unconfirmedAmount\">${transfer.toWalletAmount}</span> ${coinData.getCurrency(toWallet.currencyId).name}";
 
     ButtonElement buttonConfirm = new ButtonElement();
-    row.addCell().children.add(buttonConfirm);
     buttonConfirm.innerHtml = "Confirm";
     buttonConfirm.addEventListener(
       "click",
@@ -239,7 +248,6 @@ class UnconfiemedPopulator {
     );
 
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell().children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener(
       "click",
@@ -247,6 +255,11 @@ class UnconfiemedPopulator {
         onDelete(transfer);
       },
     );
+
+    row.addCell()
+      ..classes.add("td_right")
+      ..children.add(buttonConfirm)
+      ..children.add(buttonDelete);
 
     return r;
   }

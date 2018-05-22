@@ -163,6 +163,10 @@ h2 {
 
 /* Unconfirmed */
 
+.td_right{
+  text-align: right;
+}
+
 .unconfirmedTransactionTitle {
   font-weight: bold;
   color: #212121;
@@ -181,7 +185,7 @@ h2 {
 }
 
 .unconfirmedDeposit td {
-  width: 25%;
+  width: 33.33%;
 }
 
 .unconfirmedWithdrawal {
@@ -191,7 +195,7 @@ h2 {
 }
 
 .unconfirmedWithdrawal td {
-  width: 25%;
+  width: 33.33%;
 }
 
 .unconfirmedTransfer {
@@ -201,7 +205,7 @@ h2 {
 }
 
 .unconfirmedTransfer td {
-  width: 16.6%;
+  width: 20%;
 }
 
 /* Confirmed */

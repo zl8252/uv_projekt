@@ -131,7 +131,7 @@ class ConfirmedPopulator {
         "${walletData.currency.name}";
 
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell().children.add(buttonDelete);
+    row.addCell()..classes.add("td_right")..children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener("click", (_) {
       onDelete(deposit);
@@ -159,7 +159,7 @@ class ConfirmedPopulator {
         "${walletData.currency.name}";
 
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell().children.add(buttonDelete);
+    row.addCell()..classes.add("td_right")..children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener(
       "click",
@@ -198,7 +198,7 @@ class ConfirmedPopulator {
         ..innerHtml = "to <br>"
             "<span class=\"unconfirmedAmount\"> ${toWallet.name}</span>";
     } else {
-            row.addCell()
+      row.addCell()
         ..classes.add("text_center")
         ..innerHtml = "from <br>"
             "<span class=\"unconfirmedAmount\"> ${fromWallet.name}</span>";
@@ -210,7 +210,7 @@ class ConfirmedPopulator {
           "${coinData.getCurrency(toWallet.currencyId).name}";
 
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell().children.add(buttonDelete);
+    row.addCell()..classes.add("td_right")..children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener(
       "click",
