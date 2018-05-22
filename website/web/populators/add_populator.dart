@@ -22,7 +22,7 @@ class AddPopulator {
   });
 
   void clear() {
-    addDivContent.innerHtml = "";
+    addDivNavigation.innerHtml = "";
     addDivContent.innerHtml = "";
   }
 
