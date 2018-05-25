@@ -245,3 +245,15 @@ h2 {
 .confirmedTransfer td {
   width: 20%;
 }
+
+/* Expanded */
+
+.expandedTable{
+  padding-top: 10px;
+  width: 100%;
+}
+
+.expandedColumn1{
+  padding-left: 30px;
+  vertical-align: top;
+}
