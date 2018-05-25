@@ -185,7 +185,7 @@ h2 {
 }
 
 .unconfirmedDeposit td {
-  width: 33.33%;
+  width: 50%;
 }
 
 .unconfirmedWithdrawal {
@@ -195,7 +195,7 @@ h2 {
 }
 
 .unconfirmedWithdrawal td {
-  width: 33.33%;
+  width: 50%;
 }
 
 .unconfirmedTransfer {
@@ -223,7 +223,7 @@ h2 {
 }
 
 .confirmedDeposit td {
-  width: 33.33%;
+  width: 50%;
 }
 
 .confirmedWithdrawal {

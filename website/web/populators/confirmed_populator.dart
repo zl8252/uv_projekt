@@ -118,6 +118,8 @@ class ConfirmedPopulator {
     @required DepositCallback onChanged,
     @required DepositCallback onDelete,
   }) {
+    bool isExpanded = false;
+
     TableElement r = new TableElement();
     r.classes.add("confirmedDeposit");
 
@@ -130,11 +132,47 @@ class ConfirmedPopulator {
         "<span class=\"unconfirmedAmount\">${deposit.amount}</span> "
         "${walletData.currency.name}";
 
+    TableRowElement expandedRow = r.addRow();
+    TableCellElement expandedCell = expandedRow.addCell();
+    expandedCell.colSpan = 2;
+
+    TableElement expandedTable = new TableElement();
+    expandedTable.classes.add("expandedTable");
+    TableRowElement expandedTableRow1 = expandedTable.addRow();
+    TableCellElement r1c1 = expandedTableRow1.addCell();
+    r1c1.classes.add("expandedColumn1");
+    r1c1.innerHtml = "&#9656; Time stamp: ";
+    TableCellElement r1c2 = expandedTableRow1.addCell();
+    DateTime timeStamp =
+        new DateTime.fromMillisecondsSinceEpoch(deposit.timeStamp);
+    r1c2.innerHtml =
+        "${timeStamp.year}.${timeStamp.month}.${timeStamp.day} ${timeStamp.hour}:${timeStamp.minute}";
+
+    TableRowElement expandedTableRow2 = expandedTable.addRow();
+    TableCellElement r2c1 = expandedTableRow2.addCell();
+    r2c1.classes.add("expandedColumn1");
+    r2c1.innerHtml = "&#9656; Actions: ";
+    TableCellElement r2c2 = expandedTableRow2.addCell();
+
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell()..classes.add("td_right")..children.add(buttonDelete);
+    // row.addCell()..classes.add("td_right")..children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener("click", (_) {
       onDelete(deposit);
+    });
+
+    r2c2.children.addAll([
+      buttonDelete,
+    ]);
+
+    r.addEventListener("click", (_) {
+      isExpanded = !isExpanded;
+      print("isExpanded: $isExpanded");
+      if (isExpanded) {
+        expandedCell.children.add(expandedTable);
+      } else {
+        expandedCell.innerHtml = "";
+      }
     });
 
     return r;
@@ -146,6 +184,8 @@ class ConfirmedPopulator {
     @required WithdrawalCallback onChanged,
     @required WithdrawalCallback onDelete,
   }) {
+    bool isExpanded = false;
+
     TableElement r = new TableElement();
     r.classes.add("confirmedWithdrawal");
 
@@ -158,8 +198,30 @@ class ConfirmedPopulator {
         "<span class=\"unconfirmedAmount\">${withdrawal.amount}</span> "
         "${walletData.currency.name}";
 
+    TableRowElement expandedRow = r.addRow();
+    TableCellElement expandedCell = expandedRow.addCell();
+    expandedCell.colSpan = 2;
+
+    TableElement expandedTable = new TableElement();
+    expandedTable.classes.add("expandedTable");
+    TableRowElement expandedTableRow1 = expandedTable.addRow();
+    TableCellElement r1c1 = expandedTableRow1.addCell();
+    r1c1.classes.add("expandedColumn1");
+    r1c1.innerHtml = "&#9656; Time stamp: ";
+    TableCellElement r1c2 = expandedTableRow1.addCell();
+    DateTime timeStamp =
+        new DateTime.fromMillisecondsSinceEpoch(withdrawal.timeStamp);
+    r1c2.innerHtml =
+        "${timeStamp.year}.${timeStamp.month}.${timeStamp.day} ${timeStamp.hour}:${timeStamp.minute}";
+
+    TableRowElement expandedTableRow2 = expandedTable.addRow();
+    TableCellElement r2c1 = expandedTableRow2.addCell();
+    r2c1.classes.add("expandedColumn1");
+    r2c1.innerHtml = "&#9656; Actions: ";
+    TableCellElement r2c2 = expandedTableRow2.addCell();
+
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell()..classes.add("td_right")..children.add(buttonDelete);
+    // row.addCell()..classes.add("td_right")..children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener(
       "click",
@@ -167,6 +229,18 @@ class ConfirmedPopulator {
         onDelete(withdrawal);
       },
     );
+
+    r2c2.children.add(buttonDelete);
+
+    r.addEventListener("click", (_) {
+      isExpanded = !isExpanded;
+      print("isExpanded: $isExpanded");
+      if (isExpanded) {
+        expandedCell.children.add(expandedTable);
+      } else {
+        expandedCell.innerHtml = "";
+      }
+    });
 
     return r;
   }
@@ -178,6 +252,8 @@ class ConfirmedPopulator {
     @required TransferCallback onChanged,
     @required TransferCallback onDelete,
   }) {
+    bool isExpanded = false;
+
     TableElement r = new TableElement();
     r.classes.add("confirmedTransfer");
 
@@ -209,8 +285,30 @@ class ConfirmedPopulator {
           "<span class=\"unconfirmedAmount\">${transfer.toWalletAmount} </span>"
           "${coinData.getCurrency(toWallet.currencyId).name}";
 
+    TableRowElement expandedRow = r.addRow();
+    TableCellElement expandedCell = expandedRow.addCell();
+    expandedCell.colSpan = 4;
+
+    TableElement expandedTable = new TableElement();
+    expandedTable.classes.add("expandedTable");
+    TableRowElement expandedTableRow1 = expandedTable.addRow();
+    TableCellElement r1c1 = expandedTableRow1.addCell();
+    r1c1.classes.add("expandedColumn1");
+    r1c1.innerHtml = "&#9656; Time stamp: ";
+    TableCellElement r1c2 = expandedTableRow1.addCell();
+    DateTime timeStamp =
+        new DateTime.fromMillisecondsSinceEpoch(transfer.timeStamp);
+    r1c2.innerHtml =
+        "${timeStamp.year}.${timeStamp.month}.${timeStamp.day} ${timeStamp.hour}:${timeStamp.minute}";
+
+    TableRowElement expandedTableRow2 = expandedTable.addRow();
+    TableCellElement r2c1 = expandedTableRow2.addCell();
+    r2c1.classes.add("expandedColumn1");
+    r2c1.innerHtml = "&#9656; Actions: ";
+    TableCellElement r2c2 = expandedTableRow2.addCell();
+
     ButtonElement buttonDelete = new ButtonElement();
-    row.addCell()..classes.add("td_right")..children.add(buttonDelete);
+    // row.addCell()..classes.add("td_right")..children.add(buttonDelete);
     buttonDelete.innerHtml = "Delete";
     buttonDelete.addEventListener(
       "click",
@@ -218,6 +316,20 @@ class ConfirmedPopulator {
         onDelete(transfer);
       },
     );
+
+    r2c2.children.addAll([
+      buttonDelete,
+    ]);
+
+    r.addEventListener("click", (_) {
+      isExpanded = !isExpanded;
+      print("isExpanded: $isExpanded");
+      if (isExpanded) {
+        expandedCell.children.add(expandedTable);
+      } else {
+        expandedCell.innerHtml = "";
+      }
+    });
 
     return r;
   }
