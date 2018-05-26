@@ -1,0 +1,315 @@
+#main_content {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+#main_content_two_column:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#main_content_left {
+  float: left;
+  width: 250px;
+}
+
+#content_left {
+  background-color: #FFE082;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+#main_content_right {
+  float: left;
+  width: 600px;
+}
+
+#content_right {
+  padding-left: 10px;
+  padding-right: 10px;
+  /* padding-top: 25px; */
+  padding-bottom: 25px;
+}
+
+.text_center {
+  text-align: center;
+}
+
+/* ----------- Left */
+#title_1{
+  font-size: 40px;
+  font-weight: 600;
+  color: #212121;
+}
+
+#title_2{
+  font-size: 40px;
+  padding-left: 20px;
+  font-weight: 600;
+  color: #212121;
+
+  padding-bottom: 25px;
+}
+
+#walletsDiv > table, th, td {
+  width: 100%
+}
+
+.wallet_table {
+  margin-bottom: 10px;
+  border: 1px solid #F57C00;
+}
+
+.walletName {
+  font-size: 20px;
+  font-weight: 600;
+  color: #212121;
+  text-align: center;
+  background-color: #F57C00;
+}
+
+.currencyName {
+  color: #424242;
+}
+
+.walletBalance{
+  font-size: 18px;
+  font-weight: 600;
+  color: #212121;
+}
+
+/* CreateDiv */
+
+#createDiv{
+  padding-top: 20px;
+}
+
+.createDivPlus {
+  font-weight: 600;
+  padding-left: 20px;
+  padding-right: 5px;
+}
+
+#createDivTable {
+  width: 100%;
+}
+
+/* ----------- Right */
+
+h2 {
+  /* background-color: #FFE082; */
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 700;
+}
+
+/* WalletName */
+#walletNameDiv {
+  width: 100%;
+  text-align: center;
+  /* padding-bottom: 25px; */
+}
+
+/* Status */
+#statusTable{
+  width: 100%;
+  border: 1px solid black;
+}
+
+#statusTable td {
+  border: 1px solid black;
+  width: 25%;
+}
+
+.statusTable_title {
+  font-weight: bold;
+  color: #212121;
+  text-align: center;
+}
+
+.statusTable_value {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: right;
+}
+
+
+/* Add */
+
+#addDiv{
+  padding-top: 20px;
+}
+
+#addDivNavigation table, #addDivNavigation td {
+  table-layout:fixed;
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+#addDivNavigation {
+  padding-bottom: 10px;
+}
+
+.addSelected {
+  background-color: #F57C00;
+}
+
+#addDivContent {
+  width: 100%;
+}
+
+.addContentTable {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #EEEEEE;
+  padding: 20px;
+}
+
+#addDivContent table {
+  width: 50%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+#addDivContent td {
+  vertical-align: top;
+  padding-bottom: 15px;
+}
+
+/* Unconfirmed */
+
+.td_right{
+  text-align: right;
+}
+
+.unconfirmedTransactionTitle {
+  font-weight: bold;
+  color: #212121;
+  text-align: left;
+}
+
+.unconfirmedAmount {
+  font-weight: 600;
+  color: #212121;
+}
+
+.unconfirmedDeposit {
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
+}
+
+.unconfirmedDeposit td {
+  width: 50%;
+}
+
+.unconfirmedWithdrawal {
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
+}
+
+.unconfirmedWithdrawal td {
+  width: 50%;
+}
+
+.unconfirmedTransfer {
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
+}
+
+.unconfirmedTransfer td {
+  width: 20%;
+}
+
+/* Confirmed */
+
+.confirmedTransactionTitle {
+  font-weight: bold;
+  color: #212121;
+  text-align: left;
+}
+
+.confirmedDeposit {
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
+}
+
+.confirmedDeposit td {
+  width: 50%;
+}
+
+.confirmedWithdrawal {
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
+}
+
+.confirmedWithdrawal td {
+  width: 33.33%;
+}
+
+.confirmedTransfer{
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 3px;
+}
+
+.confirmedTransfer td {
+  width: 20%;
+}
+
+/* Expanded */
+
+.expandedTable{
+  padding-top: 10px;
+  width: 100%;
+}
+
+.expandedColumn1{
+  padding-left: 30px;
+  vertical-align: top;
+}
+
+/* Create___ */
+#content_createCurrency{
+  text-align: center;
+}
+
+#content_createWallet {
+  text-align: center;
+}
+
+.currenciesTable{
+  width: 100%;
+}
+
+.currenciesTable td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+
+.createCurrencyTable{
+  margin-top: 25px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #EEEEEE;
+  padding: 20px;
+  border: 1px solid black;
+}
