@@ -345,4 +345,26 @@ class CoinData {
     }
     return maxId + 1;
   }
+
+  int generateNewCurrencyId(){
+    int maxId = -10;
+    for (Currency currency in currencies){
+      if (currency.id > maxId){
+        maxId = currency.id;
+      }
+    }
+
+    return maxId +1;
+  }
+
+  int generateNewWalletId(){
+    int maxId = -10;
+    for (Wallet wallet in wallets){
+      if (wallet.id > maxId){
+        maxId = wallet.id;
+      }
+    }
+
+    return maxId +1;
+  }
 }

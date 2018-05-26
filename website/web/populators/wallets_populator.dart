@@ -35,18 +35,22 @@ class WalletsPopulator {
 
   Element _createWalletElement(WalletData walletData) {
     TableElement r = new TableElement();
+    r.classes.add("wallet_table");
 
     TableRowElement row1 = r.addRow();
     TableCellElement walletNameCell = row1.addCell();
+    walletNameCell.classes.add("walletName");
     walletNameCell.colSpan = 2;
     walletNameCell.innerHtml = "${walletData.wallet.name}";
 
     TableRowElement row2 = r.addRow();
 
     TableCellElement currencyCell = row2.addCell();
+    currencyCell.classes.add("currencyName");
     currencyCell.innerHtml = "${walletData.currency.name}";
 
     TableCellElement balanceCell = row2.addCell();
+    balanceCell.classes.add("walletBalance");
     balanceCell.innerHtml = "${walletData.confirmedBalance}";
 
     return r;

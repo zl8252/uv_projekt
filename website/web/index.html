@@ -15,45 +15,66 @@
 </head>
 
 <body>
-  <div id="wrapperContent">
-    <div id="leftContent">
-      <div id="webpageTitle">
-        <h1>Kripto</h1>
-        <h1>prijatelj</h1>
-      </div>
-      <div>
-        <button id="clearAllButton">Clear All</button>
-        <button id="populateAllButton">Populate All</button>
-      </div>
-      <div id="walletsDiv">
-      </div>
-    </div>
-    <div id="centerContent">
-      <div id="contentAdd">
-        <div id="titleAdd">
-          <h2>
-            Add
-          </h2>
+  <div id="main_content">
+    <div id="main_content_two_column">
+      <div id="main_content_left">
+        <div id="content_left">
+          <div id="title_1">
+            Kripto
+          </div>
+          <div id="title_2">
+            Prijatelj
+          </div>
+          <!-- <button id="clearAllButton">Clear All</button> -->
+          <!-- <button id="populateAllButton">Populate All</button> -->
+          <div id="walletsDiv"></div>
+          <div id="createDiv">
+            <table id="createDivTable">
+              <tr id="createCurrencyRow">
+                <td>
+                  <span class="createDivPlus">
+                    Create
+                  </span> Currency
+                </td>
+              </tr>
+              <tr id="createWalletRow">
+                <td>
+                  <span class="createDivPlus">
+                    Create
+                  </span> Wallet
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
-        <div id="addDiv">
-          <div id="addDivNavigation"></div>
-          <div id="addDivContent"></div>
+      </div>
+      <div id="main_content_right">
+        <div id="content_right">
+          <div id="content_createCurrency">
+          </div>
+          <div id="content_createWallet">
+          </div>
+          <div id="content_wallet">
+            <div id="walletNameDiv">
+              <h1>Wallet Name</h1>
+            </div>
+            <div id="statusDiv"></div>
+            <!-- <h2>
+              Add
+            </h2> -->
+            <div id="addDiv">
+              <div id="addDivNavigation"></div>
+              <div id="addDivContent"></div>
+            </div>
+            <h2>
+              Unconfirmed Transactions
+            </h2>
+            <div id="unconfirmedDiv"></div>
+            <h2>Confirmed Transactions</h2>
+            <div id="confirmedDiv"></div>
+          </div>
         </div>
       </div>
-      <div id="contentStatus">
-        <h2>Status</h2>
-        <div id="statusDiv"></div>
-      </div>
-      <div id="contentUnconfirmed">
-        <h2>Unconfirmed</h2>
-        <div id="unconfirmedDiv"></div>
-        </table>
-      </div>
-      <div id="contentConfirmed">
-        <h2>Confirmed</h2>
-        <div id="confirmedDiv"></div>
-      </div>
-
     </div>
   </div>
 </body>

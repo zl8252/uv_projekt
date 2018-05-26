@@ -5,6 +5,13 @@ import 'callbacks.dart';
 
 import '../coin_data/coin_data.dart';
 
+enum SelectedNavigation {
+  none,
+  deposit,
+  withdrawal,
+  transfer,
+}
+
 class AddPopulator {
   final DivElement addDivNavigation;
   final DivElement addDivContent;
@@ -15,7 +22,7 @@ class AddPopulator {
   });
 
   void clear() {
-    addDivContent.innerHtml = "";
+    addDivNavigation.innerHtml = "";
     addDivContent.innerHtml = "";
   }
 
@@ -27,6 +34,7 @@ class AddPopulator {
     print("Populating Add");
 
     TableElement addTable = _createTableAdd(
+      selectedNavigation: SelectedNavigation.none,
       onDeposit: () {
         _populateAddDeposit(
           addDivContent: addDivContent,
@@ -71,34 +79,62 @@ class AddPopulator {
     @required VoidCallback onDeposit,
     @required VoidCallback onWithdrawal,
     @required VoidCallback onTransfer,
+    @required SelectedNavigation selectedNavigation,
   }) {
     TableElement r = new TableElement();
-    r.id = "tableAdd";
 
     TableRowElement navigationRow = r.addRow();
     navigationRow.classes.add("addNavigation");
 
+    TableCellElement deposit;
+    TableCellElement withdrawal;
+    TableCellElement transfer;
+
+    void clearAddSelected() {
+      deposit.classes.remove("addSelected");
+      withdrawal.classes.remove("addSelected");
+      transfer.classes.remove("addSelected");
+    }
+
     // addNavigationDeposit
-    TableCellElement deposit = navigationRow.addCell();
-    deposit.id = "addNavigationDeposit";
+    deposit = navigationRow.addCell();
     deposit.innerHtml = "Deposit";
+    if (selectedNavigation == SelectedNavigation.deposit) {
+      deposit.classes.add("addSelected");
+    } else {
+      deposit.classes.remove("addSelected");
+    }
     deposit.addEventListener("click", (_) {
+      clearAddSelected();
+      deposit.classes.add("addSelected");
       onDeposit();
     });
 
     // addNavigationWithdrawal
-    TableCellElement withdrawal = navigationRow.addCell();
-    withdrawal.id = "addNavigationWithdrawal";
+    withdrawal = navigationRow.addCell();
+    if (selectedNavigation == SelectedNavigation.withdrawal) {
+      deposit.classes.add("addSelected");
+    } else {
+      deposit.classes.remove("addSelected");
+    }
     withdrawal.innerHtml = "Withdrawal";
     withdrawal.addEventListener("click", (_) {
+      clearAddSelected();
+      withdrawal.classes.add("addSelected");
       onWithdrawal();
     });
 
     // addNavigationTransfer
-    TableCellElement transfer = navigationRow.addCell();
-    transfer.id = "addNavigationTransfer";
+    transfer = navigationRow.addCell();
+    if (selectedNavigation == SelectedNavigation.transfer) {
+      deposit.classes.add("addSelected");
+    } else {
+      deposit.classes.remove("addSelected");
+    }
     transfer.innerHtml = "Transfer";
     transfer.addEventListener("click", (_) {
+      clearAddSelected();
+      transfer.classes.add("addSelected");
       onTransfer();
     });
 
@@ -132,6 +168,8 @@ class AddPopulator {
     currencyCell.classes.add("addDepositCurrency");
 
     currencyCell.innerHtml = "${currentWalletData.currency.name}";
+
+    row = table.addRow();
 
     // confirmed
     TableCellElement confirmedCell = row.addCell();
@@ -197,6 +235,8 @@ class AddPopulator {
 
     currencyCell.innerHtml = "${currentWalletData.currency.name}";
 
+    row = table.addRow();
+
     // confirmed
     TableCellElement confirmedCell = row.addCell();
     confirmedCell.classes.add("addWithdrawalConfirmed");
@@ -261,6 +301,8 @@ class AddPopulator {
 
     fromCurrencyCell.innerHtml = "${currentWalletData.currency.name}";
 
+    row = table.addRow();
+
     // toText
     TableCellElement toTextCell = row.addCell();
     toTextCell.classes.add("addTransferToText");
@@ -284,11 +326,12 @@ class AddPopulator {
     toWalletSelect.children.addAll(optionElements);
     toWalletCell.children.add(toWalletSelect);
 
-    // asText
-    TableCellElement asTextCell = row.addCell();
-    asTextCell.classes.add("addTransferToText");
+    SpanElement asText = new SpanElement();
+    asText.innerHtml = " as";
+    toWalletCell.children.add(asText);
 
-    asTextCell.innerHtml = "as";
+    // adds new row
+    row = table.addRow();
 
     // toAmount
     TableCellElement toAmountCell = row.addCell();
@@ -315,6 +358,8 @@ class AddPopulator {
         coinData,
       );
     });
+
+    row = table.addRow();
 
     // confirmed
     TableCellElement confirmedCell = row.addCell();

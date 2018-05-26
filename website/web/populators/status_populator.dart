@@ -16,69 +16,45 @@ class StatusPopulator {
   }
 
   void populate(WalletData walletData) {
+    print("Populating Status");
+
     TableElement table = new TableElement();
+    table.id = "statusTable";
     statusDiv.children.add(table);
 
     TableRowElement titleRow = table.addRow();
     TableRowElement valueRow = table.addRow();
 
     // Deposited
-    titleRow.addCell().innerHtml = "Deposited";
-    valueRow.addCell().innerHtml = "${walletData.confirmedDeposited}";
+    titleRow.addCell()
+      ..classes.add("statusTable_title")
+      ..innerHtml = "Deposited";
+    valueRow.addCell()
+      ..classes.add("statusTable_value")
+      ..innerHtml = "${walletData.confirmedDeposited}";
 
     // Withdrawaled
-    titleRow.addCell().innerHtml = "Withdrawaled";
-    valueRow.addCell().innerHtml = "${walletData.confirmedWithdrawaled}";
+    titleRow.addCell()
+      ..classes.add("statusTable_title")
+      ..innerHtml = "Withdrawaled";
+    valueRow.addCell()
+      ..classes.add("statusTable_value")
+      ..innerHtml = "${walletData.confirmedWithdrawaled}";
 
     // ConfirmedBallance
-    titleRow.addCell().innerHtml = "Confirmed Balance";
-    valueRow.addCell().innerHtml = "${walletData.confirmedBalance}";
+    titleRow.addCell()
+      ..classes.add("statusTable_title")
+      ..innerHtml = "Confirmed Balance";
+    valueRow.addCell()
+      ..classes.add("statusTable_value")
+      ..innerHtml = "${walletData.confirmedBalance}";
 
     // PotentialBallance
-    titleRow.addCell().innerHtml = "Potential Balance";
-    valueRow.addCell().innerHtml = "${walletData.potentialBalance}";
-    
-
-    // // fils row Headers
-    // TableCellElement hDeposited = rowHeaders.addCell();
-    // hDeposited
-    //   ..innerHtml = "Deposited"
-    //   ..classes.add(".statusLabel");
-
-    // TableCellElement hWithdrawaled = rowHeaders.addCell();
-    // hWithdrawaled
-    //   ..innerHtml = "Withdrawaled"
-    //   ..classes.add(".statusLabel");
-
-    // TableCellElement hConfirmed = rowHeaders.addCell();
-    // hConfirmed
-    //   ..innerHtml = "Confirmed Balance"
-    //   ..classes.add(".statusLabel");
-
-    // TableCellElement hPotential = rowHeaders.addCell();
-    // hPotential
-    //   ..innerHtml = "Potential Balance"
-    //   ..classes.add(".statusLabel");
-
-    // // fills row Nums
-    // TableCellElement nDeposited = rowNums.addCell();
-    // nDeposited
-    //   ..innerHtml = "${walletData.confirmedDeposited}"
-    //   ..classes.add(".statusLabel");
-
-    // TableCellElement nWithdrawaled = rowNums.addCell();
-    // nWithdrawaled
-    //   ..innerHtml = "${walletData.confirmedWithdrawaled}"
-    //   ..classes.add(".statusLabel");
-
-    // TableCellElement nConfirmed = rowNums.addCell();
-    // nConfirmed
-    //   ..innerHtml = "${walletData.confirmedBalance}"
-    //   ..classes.add(".statusLabel");
-
-    // TableCellElement nPotential = rowNums.addCell();
-    // nPotential
-    //   ..innerHtml = "${walletData.potentialBalance}"
-    //   ..classes.add(".statusLabel");
+    titleRow.addCell()
+      ..classes.add("statusTable_title")
+      ..innerHtml = "Potential Balance";
+    valueRow.addCell()
+      ..classes.add("statusTable_value")
+      ..innerHtml = "${walletData.potentialBalance}";
   }
 }
