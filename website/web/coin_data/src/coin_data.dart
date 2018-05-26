@@ -356,4 +356,15 @@ class CoinData {
 
     return maxId +1;
   }
+
+  int generateNewWalletId(){
+    int maxId = -10;
+    for (Wallet wallet in wallets){
+      if (wallet.id > maxId){
+        maxId = wallet.id;
+      }
+    }
+
+    return maxId +1;
+  }
 }

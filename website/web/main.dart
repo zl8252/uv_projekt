@@ -35,6 +35,7 @@ StatusPopulator statusPopulator;
 UnconfiemedPopulator unconfiemedPopulator;
 ConfirmedPopulator confirmedPopulator;
 CreateCurrencyPopulator createCurrencyPopulator;
+CreateWalletPopulator createWalletPopulator;
 
 Future<Null> main() async {
   initWebpageComponentsAndPopulators();
@@ -52,15 +53,15 @@ void initWebpageComponentsAndPopulators() {
   contentCreateWallet = querySelector("#content_createWallet");
   contentWallet = querySelector("#content_wallet");
 
-  ButtonElement clearAllButton = querySelector("#clearAllButton");
-  clearAllButton.addEventListener("click", (_) {
-    clearAll();
-  });
+  // ButtonElement clearAllButton = querySelector("#clearAllButton");
+  // clearAllButton.addEventListener("click", (_) {
+  //   clearAll();
+  // });
 
-  ButtonElement populateAllButton = querySelector("#populateAllButton");
-  populateAllButton.addEventListener("click", (_) {
-    populateAll();
-  });
+  // ButtonElement populateAllButton = querySelector("#populateAllButton");
+  // populateAllButton.addEventListener("click", (_) {
+  //   populateAll();
+  // });
 
   // Wallets
   DivElement walletsDiv = querySelector("#walletsDiv");
@@ -106,8 +107,9 @@ void initWebpageComponentsAndPopulators() {
     displayedContnet = DisplayedContnet.createCurrency;
     updateDisplayedContent();
   });
-  createCurrencyPopulator = new CreateCurrencyPopulator(createCurrencyDiv: contentCreateCurrency);
-  
+  createCurrencyPopulator = new CreateCurrencyPopulator(
+    createCurrencyDiv: contentCreateCurrency,
+  );
 
   // CreateWallet
   TableRowElement createWalletRow = querySelector("#createWalletRow");
@@ -115,6 +117,9 @@ void initWebpageComponentsAndPopulators() {
     displayedContnet = DisplayedContnet.createWallet;
     updateDisplayedContent();
   });
+  createWalletPopulator = new CreateWalletPopulator(
+    createWalletDiv: contentCreateWallet,
+  );
 }
 
 Future<Null> initCoinData() async {
@@ -214,12 +219,26 @@ void populateAll() {
       });
 
   // CreateCurrency
-  createCurrencyPopulator.populate(coinData: coinData, onRefresh: (){
-    clearAll();
-    initCoinData().then((_){
-      populateAll();
-    });
-  });
+  createCurrencyPopulator.populate(
+    coinData: coinData,
+    onRefresh: () {
+      clearAll();
+      initCoinData().then((_) {
+        populateAll();
+      });
+    },
+  );
+
+  // CreateWallet
+  createWalletPopulator.populate(
+    coinData: coinData,
+    onRefresh: () {
+      clearAll();
+      initCoinData().then((_){
+        populateAll();
+      });
+    },
+  );
 }
 
 void onWalletSelected(int walletId) {
@@ -240,4 +259,5 @@ void clearAll() {
   unconfiemedPopulator.clear();
   confirmedPopulator.clear();
   createCurrencyPopulator.clear();
+  createWalletPopulator.clear();
 }

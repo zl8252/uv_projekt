@@ -64,7 +64,8 @@
 }
 
 .wallet_table {
-  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #F57C00;
 }
 
 .walletName {
@@ -104,7 +105,7 @@
 /* ----------- Right */
 
 h2 {
-  background-color: #FFE082;
+  /* background-color: #FFE082; */
   width: 100%;
   text-align: center;
   padding-top: 10px;
@@ -116,7 +117,7 @@ h2 {
 #walletNameDiv {
   width: 100%;
   text-align: center;
-  padding-bottom: 25px;
+  /* padding-bottom: 25px; */
 }
 
 /* Status */
@@ -145,6 +146,10 @@ h2 {
 
 /* Add */
 
+#addDiv{
+  padding-top: 20px;
+}
+
 #addDivNavigation table, #addDivNavigation td {
   table-layout:fixed;
   width: 100%;
@@ -171,10 +176,15 @@ h2 {
   padding: 20px;
 }
 
-#addDivContent table, #addDivContent td {
+#addDivContent table {
   width: 50%;
   text-align: center;
   border: 1px solid black;
+}
+
+#addDivContent td {
+  vertical-align: top;
+  padding-bottom: 15px;
 }
 
 /* Unconfirmed */
@@ -274,9 +284,12 @@ h2 {
   vertical-align: top;
 }
 
-/* CreateCurrency */
+/* Create___ */
 #content_createCurrency{
-  width: 100%;
+  text-align: center;
+}
+
+#content_createWallet {
   text-align: center;
 }
 
