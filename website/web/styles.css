@@ -85,6 +85,22 @@
   color: #212121;
 }
 
+/* CreateDiv */
+
+#createDiv{
+  padding-top: 20px;
+}
+
+.createDivPlus {
+  font-weight: 600;
+  padding-left: 20px;
+  padding-right: 5px;
+}
+
+#createDivTable {
+  width: 100%;
+}
+
 /* ----------- Right */
 
 h2 {
@@ -256,4 +272,31 @@ h2 {
 .expandedColumn1{
   padding-left: 30px;
   vertical-align: top;
+}
+
+/* CreateCurrency */
+#content_createCurrency{
+  width: 100%;
+  text-align: center;
+}
+
+.currenciesTable{
+  width: 100%;
+}
+
+.currenciesTable td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+
+.createCurrencyTable{
+  margin-top: 25px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #EEEEEE;
+  padding: 20px;
+  border: 1px solid black;
 }

@@ -12,17 +12,20 @@ CoinData coinData;
 
 int selectedWalletId;
 
+DisplayedContnet displayedContnet = DisplayedContnet.wallet;
+
+enum DisplayedContnet {
+  createCurrency,
+  createWallet,
+  wallet,
+}
+
 // Webpage components ------------------------------------------
 
-// wallets
-TableElement tableWallets;
-
-// status
-TableElement tableStatus;
-
-// table tansactions
-TableElement tableUnconfirmed;
-TableElement tableConfirmed;
+// Content
+DivElement contentCreateCurrency;
+DivElement contentCreateWallet;
+DivElement contentWallet;
 
 // Populators
 WalletNamePopulator walletNamePopulator;
@@ -31,9 +34,12 @@ AddPopulator addPopulator;
 StatusPopulator statusPopulator;
 UnconfiemedPopulator unconfiemedPopulator;
 ConfirmedPopulator confirmedPopulator;
+CreateCurrencyPopulator createCurrencyPopulator;
 
 Future<Null> main() async {
   initWebpageComponentsAndPopulators();
+
+  updateDisplayedContent();
 
   browserClient = new BrowserClient();
   await initCoinData();
@@ -42,6 +48,10 @@ Future<Null> main() async {
 }
 
 void initWebpageComponentsAndPopulators() {
+  contentCreateCurrency = querySelector("#content_createCurrency");
+  contentCreateWallet = querySelector("#content_createWallet");
+  contentWallet = querySelector("#content_wallet");
+
   ButtonElement clearAllButton = querySelector("#clearAllButton");
   clearAllButton.addEventListener("click", (_) {
     clearAll();
@@ -89,6 +99,22 @@ void initWebpageComponentsAndPopulators() {
   confirmedPopulator = new ConfirmedPopulator(
     confirmedDiv: confirmedDiv,
   );
+
+  // CreateCurrency
+  TableRowElement createCurrencyRow = querySelector("#createCurrencyRow");
+  createCurrencyRow.addEventListener("click", (_) {
+    displayedContnet = DisplayedContnet.createCurrency;
+    updateDisplayedContent();
+  });
+  createCurrencyPopulator = new CreateCurrencyPopulator(createCurrencyDiv: contentCreateCurrency);
+  
+
+  // CreateWallet
+  TableRowElement createWalletRow = querySelector("#createWalletRow");
+  createWalletRow.addEventListener("click", (_) {
+    displayedContnet = DisplayedContnet.createWallet;
+    updateDisplayedContent();
+  });
 }
 
 Future<Null> initCoinData() async {
@@ -106,6 +132,32 @@ Future<Null> initCoinData() async {
   }
 
   print("Coin data initialised");
+}
+
+void updateDisplayedContent() {
+  switch (displayedContnet) {
+    case DisplayedContnet.wallet:
+      {
+        contentWallet.style.display = "block";
+        contentCreateCurrency.style.display = "none";
+        contentCreateWallet.style.display = "none";
+        break;
+      }
+    case DisplayedContnet.createCurrency:
+      {
+        contentWallet.style.display = "none";
+        contentCreateCurrency.style.display = "block";
+        contentCreateWallet.style.display = "none";
+        break;
+      }
+    case DisplayedContnet.createWallet:
+      {
+        contentWallet.style.display = "none";
+        contentCreateCurrency.style.display = "none";
+        contentCreateWallet.style.display = "block";
+        break;
+      }
+  }
 }
 
 void populateAll() {
@@ -160,10 +212,21 @@ void populateAll() {
           populateAll();
         });
       });
+
+  // CreateCurrency
+  createCurrencyPopulator.populate(coinData: coinData, onRefresh: (){
+    clearAll();
+    initCoinData().then((_){
+      populateAll();
+    });
+  });
 }
 
 void onWalletSelected(int walletId) {
   print("Wallet with id: $walletId selected");
+
+  displayedContnet = DisplayedContnet.wallet;
+  updateDisplayedContent();
 
   selectedWalletId = walletId;
   populateAll();
@@ -176,4 +239,5 @@ void clearAll() {
   statusPopulator.clear();
   unconfiemedPopulator.clear();
   confirmedPopulator.clear();
+  createCurrencyPopulator.clear();
 }
